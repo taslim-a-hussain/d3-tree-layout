@@ -1,8 +1,11 @@
 import React from 'react';
+import Head from '../Head';
+import Countries from '../Countries';
 
 const App = () => (
     <div>
-        <h1>React</h1>
+        <Head />
+        <Countries />
     </div>
 );
 

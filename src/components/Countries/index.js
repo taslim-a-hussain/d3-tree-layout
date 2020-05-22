@@ -19,8 +19,11 @@ const Countries = () => {
    
     // Component did mount
     useEffect(() => {
+        // Select canvas element
         const canvas = select(canvasRef.current);
+        // Get the width of the canvas
         const width = Math.floor(canvas.node().getBoundingClientRect().width);
+        // Get the height of the canvas
         const height = Math.floor(canvas.node().getBoundingClientRect().height);
 
         // Create svg

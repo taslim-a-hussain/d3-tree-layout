@@ -20,8 +20,23 @@ const Countries = () => {
     // Component did mount
     useEffect(() => {
         const canvas = select(canvasRef.current);
-        const width = canvas.node().getBoundingClientRect().width;
-        console.log(width);
+        const width = Math.floor(canvas.node().getBoundingClientRect().width);
+        const height = Math.floor(canvas.node().getBoundingClientRect().height);
+
+        // Create svg
+        const svg = canvas.append('svg');
+                svg.attr('width', width)
+                    .attr('height', height);
+        
+        // Create rect
+        const rect = svg.append('rect');
+                rect.attr('width', width - 20)
+                    .attr('height', height - 20)
+                    .attr('x', 10)
+                    .attr('y', 10)
+                    .attr('rx', 5)
+                    .attr('class', 'rect');
+        
     }, []);
 
     return (

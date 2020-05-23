@@ -1,12 +1,16 @@
 import React, {useRef, useEffect} from 'react';
 import {hierarchy, select} from 'd3';
+import Tree from '../Tree';
 import data from '../../data/data.json';
 import './index.scss';
 
-const Countries = () => {
+const Canvas = () => {
     
     // Ref
     const canvasRef = useRef();
+    const svgRef = useRef();
+    const rectRef = useRef();
+
     
     /**
      * Flatens the hierarchy and generates links
@@ -14,7 +18,6 @@ const Countries = () => {
      * Returns a root node (which has bunch of useful methods attached)
      */
     const root = hierarchy(data);
-    console.log('Root node: ', root);
 
    
     // Component did mount
@@ -27,26 +30,32 @@ const Countries = () => {
         const height = Math.floor(canvas.node().getBoundingClientRect().height);
 
         // Create svg
-        const svg = canvas.append('svg');
+        const svg = select(svgRef.current);
                 svg.attr('width', width)
                     .attr('height', height);
         
         // Create rect
-        const rect = svg.append('rect');
+        const rect = select(rectRef.current);
                 rect.attr('width', width - 20)
                     .attr('height', height - 20)
                     .attr('x', 10)
                     .attr('y', 10)
                     .attr('rx', 5)
-                    .attr('class', 'rect');
+                    .attr('class', 'rect')
+                    .attr('id', 'rectEl');
         
     }, []);
 
     return (
         <div className="canvas" ref={canvasRef}>
+            <svg ref={svgRef}>
+                <rect ref={rectRef}>
+                    <Tree ref={rectRef} />
+                </rect>
+            </svg>
         </div>
     );
 };
 
 
-export default Countries;
+export default Canvas;

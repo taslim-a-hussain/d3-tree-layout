@@ -1,12 +1,12 @@
 import React from 'react';
 import Head from '../Head';
-import Countries from '../Countries';
+import Canvas from '../Canvas';
 import './index.scss';
 
 const App = () => (
     <div>
         <Head />
-        <Countries />
+        <Canvas />
     </div>
 );
 

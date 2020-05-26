@@ -1,8 +1,6 @@
 .canvas {
     height: 96vh;
     background-color: lavender;
-}
-
-.rect {
-    fill: whitesmoke;
+    display: flex;
+    align-items: center;
 }

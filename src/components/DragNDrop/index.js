@@ -13,11 +13,28 @@ const DragNDrop = () => {
 
     const circleData = range(50).map(() => {
         return {
-            x : Math.round(Math.random() * (svgWidth - radius * 2 ) + radius),
-            y : Math.round(Math.random() * (svgHeight - radius * 2 ) + radius)
+            x : Math.floor(Math.random() * (svgWidth - radius * 2 ) + radius),
+            y : Math.floor(Math.random() * (svgHeight - radius * 2 ) + radius)
         };
     });
 
+
+    const handleStartDrag = (d, i) => {
+        select('#Circle'+i)
+        .raise().attr("stroke", "black");
+    };
+
+
+    const handleDrag = (d, i) => {
+        select('#Circle'+i)
+        .attr('cx', d.x = event.x)
+        .attr('cy', d.y = event.y);
+    };
+
+    const handleEndDrag = (d, i) => {
+        select('#Circle'+i)
+        .attr("stroke", null);
+    };
 
 
     // Component Did Mount
@@ -36,8 +53,12 @@ const DragNDrop = () => {
                 .attr('r', radius)
                 .attr('cx', d => d.x)
                 .attr('cy', d => d.y)
-                .attr('fill', (d, i) => schemeCategory10[i % 10]);
-
+                .attr('id', (d, i) => 'Circle'+i)
+                .attr('fill', (d, i) => schemeCategory10[i % 10])
+                .call(drag()
+                .on('start', handleStartDrag)
+                .on('drag', handleDrag)
+                .on('end', handleEndDrag));
 
     }, []);
 

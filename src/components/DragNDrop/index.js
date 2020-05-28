@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from 'react';
-import {select, range, schemeCategory10, drag, event} from 'd3';
+import {select, range, schemeCategory10, drag, event, line} from 'd3';
 import './index.scss';
 
 const DragNDrop = () => {
@@ -11,12 +11,19 @@ const DragNDrop = () => {
 
     const radius = 20;
 
-    const circleData = range(50).map(() => {
+    const circleData = range(5).map(() => {
         return {
             x : Math.floor(Math.random() * (svgWidth - radius * 2 ) + radius),
             y : Math.floor(Math.random() * (svgHeight - radius * 2 ) + radius)
         };
     });
+
+
+    const lineGenerator = line()
+        .x(d => d.x)
+        .y(d => d.y);
+
+    const liner = lineGenerator(circleData);
 
 
     const handleStartDrag = (d, i) => {
@@ -45,6 +52,11 @@ const DragNDrop = () => {
                 .attr('class', 'drag-n-drop-svg');
 
         const g = svg.append('g');
+
+        const lines = select('g')
+        .append('path')
+        .attr('d', liner)
+        .attr('id', (d, i) => 'Line'+i);
         
         const circles = g.selectAll('circle');
             circles.data(circleData)
@@ -58,7 +70,8 @@ const DragNDrop = () => {
                 .call(drag()
                 .on('start', handleStartDrag)
                 .on('drag', handleDrag)
-                .on('end', handleEndDrag));
+                .on('end', handleEndDrag));    
+
 
     }, []);
 

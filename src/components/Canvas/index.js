@@ -1,5 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
-import {select} from 'd3';
+import React, {useRef} from 'react';
 import Tree from '../Tree';
 import './index.scss';
 
@@ -10,9 +9,12 @@ const Canvas = () => {
 
 
     return (
-        <div className="canvas" ref={canvasRef}>
-            <Tree ref={canvasRef} />
-        </div>
+        <React.Fragment>
+            <div className="canvas" ref={canvasRef}>
+                <Tree ref={canvasRef} />
+            </div>
+            <h2>Tidy Tree with D3 Panning and Zooming</h2>
+        </React.Fragment>
     );
 };
 

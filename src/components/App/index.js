@@ -2,7 +2,8 @@ import React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import Head from '../Head';
 import Canvas from '../Canvas';
-import Svg from '../Svg';
+import DragNDrop from '../DragNDrop';
+import Playground from '../Playground';
 import './index.scss';
 
 const App = () => (
@@ -10,7 +11,8 @@ const App = () => (
         <Head />
         <Switch>
             <Route path="/" exact component={Canvas} />
-            <Route path="/svg" component={Svg} />
+            <Route path="/drag-n-drop" component={DragNDrop} />
+            <Route path="/playground" component={Playground} />
         </Switch>
     </HashRouter>
 );
